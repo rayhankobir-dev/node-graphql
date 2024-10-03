@@ -1,6 +1,7 @@
 import express from "express";
-import createApolloGraphqlServer from "@src/graphql";
+import createApolloGraphqlServer from "./graphql";
 import { expressMiddleware } from "@apollo/server/express4";
+import { authenticate } from "./graphql/auth";
 
 async function init() {
   const app = express();
@@ -16,13 +17,15 @@ async function init() {
     "/graphql",
     expressMiddleware(await createApolloGraphqlServer(), {
       context: async ({ req }) => {
-        //TODO: Add auth context
-        return {};
+        const user = authenticate(req);
+        return { user };
       },
     })
   );
 
-  app.listen(PORT, () => console.log(`Server started at PORT:${PORT}`));
+  app.listen(PORT, () =>
+    console.log(`Server started at http://localhost:${PORT}`)
+  );
 }
 
 init();

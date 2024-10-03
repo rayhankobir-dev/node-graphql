@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node ./dist/index.js",
     "dev": "tsc-watch --onSuccess \"npm start\" ",
+    "generate-token": "node ./src/generate-token.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

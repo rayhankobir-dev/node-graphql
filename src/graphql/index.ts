@@ -1,26 +1,11 @@
 import { ApolloServer } from "@apollo/server";
-import { Action } from "./action";
+import { resolvers } from "./resolvers";
+import { typeDefs } from "./typedef";
 
 async function createApolloGraphqlServer() {
   const gqlServer = new ApolloServer({
-    typeDefs: `
-            ${Action.typeDefs}
-            type Query {
-               ${Action.queries}
-            }
-
-            type Mutation {
-               ${Action.mutations}
-            }
-        `,
-    resolvers: {
-      Query: {
-        ...Action.resolvers.queries,
-      },
-      Mutation: {
-        ...Action.resolvers.mutations,
-      },
-    },
+    typeDefs: typeDefs,
+    resolvers: resolvers,
   });
 
   // Start the gql server
