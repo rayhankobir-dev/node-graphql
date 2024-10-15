@@ -1,6 +1,6 @@
 interface TimeStamps {
-  createdAt: Date | string;
-  updatedAt: Date | string;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 }
 
 export interface Action extends TimeStamps {
